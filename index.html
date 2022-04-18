@@ -1,0 +1,53 @@
+<html>
+    <head><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="index.css">
+        <title>Personal Dashboard</title>
+    </head>
+    <body>
+<main>
+            <div class="weather-all">
+                <div class="weather-container">
+                    <!-- <h1 class="weather-heading">TODAY'S WEATHER IN</h1> -->
+                    <!-- <hr class="hr"> -->
+                    <h2 class="weather-heading" id="weather-city">city</h2>
+                    <div class="weather-heading" id="weather-curr">weather</div>
+                    <div class="weather-elements-container">
+                        <div class="weather-elements" >
+                            <h4>Max</h4>
+                            <p id="max"></p>
+                        </div>
+                        <div class="weather-elements" >
+                            <h4>Min</h4>
+                            <p id="min"></p>
+                        </div>
+                        <div class="weather-elements">
+                            <h4>Feels Like</h4>
+                            <p id="feel"></p>
+                        </div>
+                        <div class="weather-elements">
+                            <h4>Humidity</h4>
+                            <p id="humid"></p>
+
+                        </div>
+                    </div>
+                    <hr class="hr">
+                </div>
+            </div>
+            <div class="time">
+                <h1 id="time"></h1>
+                <hr class="hr">
+                <h2 id="date"></h2>
+            </div>
+            <div class="exchange">
+                <hr style="width: 170px;">
+                <h2>ח"ש - $</h2>
+                <h2 id="currency">3.2004</h2>
+            </div>
+            
+
+            <div id="image"><p id="author"></p></div>
+        </main>
+        <script src="index.js"></script>
+    </body>
+</html>

@@ -4,7 +4,11 @@
 
 const backgroundImg = document.body.style
 const imageAuth = document.getElementById("author")
+<<<<<<< HEAD
 // let obj = {}
+=======
+let obj = {}
+>>>>>>> cf04ffbffe02ded2525d0bb308511118713820b2
 
 //Get background image
 fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature")
@@ -67,17 +71,30 @@ navigator.geolocation.getCurrentPosition(position => {
         .catch(err => console.error(err))
 });
 
+<<<<<<< HEAD
 //get exchange rate 
 fetch('https://api.exchangerate.host/latest?base=USD')
 .then(res=>res.json())
 .then(data=>{
     // console.log(data)
+=======
+fetch('https://api.exchangerate.host/latest?base=USD')
+.then(res=>res.json())
+.then(data=>{
+    console.log(data)
+>>>>>>> cf04ffbffe02ded2525d0bb308511118713820b2
     const NIS = data.rates.ILS.toFixed(3)
     document.getElementById("currency").textContent = `
         ${NIS}
     `
 })
+<<<<<<< HEAD
 fetch('https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/countries.json')
 .then(res=>res.json())
 .then(data=>console.log(data))
 
+=======
+//
+
+console.log("trying out",obj)
+>>>>>>> cf04ffbffe02ded2525d0bb308511118713820b2

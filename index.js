@@ -4,11 +4,6 @@
 
 const backgroundImg = document.body.style
 const imageAuth = document.getElementById("author")
-<<<<<<< HEAD
-// let obj = {}
-=======
-let obj = {}
->>>>>>> cf04ffbffe02ded2525d0bb308511118713820b2
 
 //Get background image
 fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature")
@@ -36,7 +31,7 @@ setInterval(getCurrentTimeDate, 1000)
 
 //weather API via geoLocation
 navigator.geolocation.getCurrentPosition(position => {
-    console.log("location:",position)
+    console.log("geolocation:",position)
     fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`)
         .then(res => {
             if (!res.ok) {
@@ -45,7 +40,7 @@ navigator.geolocation.getCurrentPosition(position => {
             return res.json()
         })
         .then(data => {
-            
+            console.log("weather",data)
             const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
 
             document.getElementById("weather-city").innerHTML =`
@@ -71,30 +66,49 @@ navigator.geolocation.getCurrentPosition(position => {
         .catch(err => console.error(err))
 });
 
-<<<<<<< HEAD
-//get exchange rate 
-fetch('https://api.exchangerate.host/latest?base=USD')
+
+fetch('https://gist.githubusercontent.com/bensquire/1ba2037079b69e38bb0d6aea4c4a0229/raw/8609a1a86683bbd6d0e4a7e9456eabf6e7b65b7f/countries.json')
 .then(res=>res.json())
 .then(data=>{
-    // console.log(data)
-=======
-fetch('https://api.exchangerate.host/latest?base=USD')
-.then(res=>res.json())
-.then(data=>{
-    console.log(data)
->>>>>>> cf04ffbffe02ded2525d0bb308511118713820b2
-    const NIS = data.rates.ILS.toFixed(3)
-    document.getElementById("currency").textContent = `
-        ${NIS}
-    `
+    console.log("alphaList:",data)
 })
-<<<<<<< HEAD
-fetch('https://raw.githubusercontent.com/dr5hn/countries-states-cities-database/master/countries.json')
+
+// !!!!!!!!!!!!! BETTER POSITION API WITH ALL INFO FOR THIS APP!!!!!!!!!!
+fetch('http://ip-api.com/json?fields=status,country,countryCode,region,city,lat,lon,timezone,currency')
 .then(res=>res.json())
-.then(data=>console.log(data))
+.then(data=>{
+    console.log("location:",data)
+    const countryName = data.countryCode
+    const long = data.lon
+    const lat = data.lat
+    const currency = data.currency
+    console.log("The local currency is:",currency)
 
-=======
-//
+    //get exchange rate 
+    const url1 = "https://v6.exchangerate-api.com/v6/93890079f894074c54a1c7fc/latest/USD"
+    const url2 = `https://api.exchangerate.host/latest?base=${currency}`
+    fetch(url2)
+    .then(res=>res.json())
+    .then(data=>{
+        console.log("exchange rate:", data)
 
-console.log("trying out",obj)
->>>>>>> cf04ffbffe02ded2525d0bb308511118713820b2
+        document.getElementById("local-currency").textContent += ` 
+        1 ${currency} costs
+        `
+        document.getElementById("curr1").textContent += ` 
+            ${data.rates.USD.toFixed(3)}
+        `
+        document.getElementById("curr2").textContent += ` 
+        ${data.rates.EUR.toFixed(3)}
+        `
+        document.getElementById("curr3").textContent += ` 
+        ${data.rates.GBP.toFixed(3)}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+        `
+        document.getElementById("curr4").textContent += ` 
+        ${data.rates.CAD.toFixed(3)}
+        `
+    })
+
+})
+
+

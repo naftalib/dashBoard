@@ -29,7 +29,7 @@ function getCurrentTimeDate() {
 //call the getTime fn on the second to keep updated acc to seconds
 setInterval(getCurrentTimeDate, 1000)
 
-//weather API via geoLocation
+//weather API using geoLocation
 navigator.geolocation.getCurrentPosition(position => {
     console.log("geolocation:",position)
     fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`)
@@ -67,20 +67,14 @@ navigator.geolocation.getCurrentPosition(position => {
 });
 
 
-fetch('https://gist.githubusercontent.com/bensquire/1ba2037079b69e38bb0d6aea4c4a0229/raw/8609a1a86683bbd6d0e4a7e9456eabf6e7b65b7f/countries.json')
-.then(res=>res.json())
-.then(data=>{
-    console.log("alphaList:",data)
-})
-
-// !!!!!!!!!!!!! BETTER POSITION API WITH ALL INFO FOR THIS APP!!!!!!!!!!
-fetch('http://ip-api.com/json?fields=status,country,countryCode,region,city,lat,lon,timezone,currency')
+// ip API 
+fetch('http://ip-api.com/json?fields=status,country,currency')
 .then(res=>res.json())
 .then(data=>{
     console.log("location:",data)
-    const countryName = data.countryCode
-    const long = data.lon
-    const lat = data.lat
+    // const countryName = data.countryCode
+    // const long = data.lon
+    // const lat = data.lat
     const currency = data.currency
     console.log("The local currency is:",currency)
 
@@ -90,22 +84,24 @@ fetch('http://ip-api.com/json?fields=status,country,countryCode,region,city,lat,
     fetch(url2)
     .then(res=>res.json())
     .then(data=>{
-        console.log("exchange rate:", data)
 
-        document.getElementById("local-currency").textContent += ` 
-        1 ${currency} costs
-        `
+        //FUNC reverses exchange rates
+        const currencyConverter = (rate)=> 1 / rate
+
+        // document.getElementById("local-currency").textContent += ` 
+        // 1 ${currency} costs
+        // `
         document.getElementById("curr1").textContent += ` 
-            ${data.rates.USD.toFixed(3)}
+            ${currencyConverter(data.rates.USD).toFixed(3)}
         `
         document.getElementById("curr2").textContent += ` 
-        ${data.rates.EUR.toFixed(3)}
+        ${currencyConverter(data.rates.EUR).toFixed(3)}
         `
         document.getElementById("curr3").textContent += ` 
-        ${data.rates.GBP.toFixed(3)}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+        ${currencyConverter(data.rates.GBP).toFixed(3)}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
         `
         document.getElementById("curr4").textContent += ` 
-        ${data.rates.CAD.toFixed(3)}
+        ${currencyConverter(data.rates.CAD).toFixed(3)}
         `
     })
 

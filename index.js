@@ -74,7 +74,7 @@ navigator.geolocation.getCurrentPosition(position => {
 // })
 
 // !!!!!!!!!!!!! BETTER POSITION API WITH ALL INFO FOR THIS APP!!!!!!!!!!
-fetch('http://ip-api.com/json?fields=status,country,countryCode,region,city,lat,lon,timezone,currency')
+fetch('https://ip-api.com/json?fields=status,country,countryCode,region,city,lat,lon,timezone,currency')
 .then(res=>res.json())
 .then(data=>{
     console.log("location:",data)

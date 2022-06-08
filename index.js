@@ -73,9 +73,14 @@ navigator.geolocation.getCurrentPosition(position => {
 //     console.log("alphaList:",data)
 // })
 
+<<<<<<< HEAD
 // !!!!!!!!!!!!! POSITION API !!!!!!!!!!
 
 fetch('http://ip-api.com/json?fields=status,country,countryCode,region,city,lat,lon,timezone,currency')
+=======
+// !!!!!!!!!!!!! BETTER POSITION API WITH ALL INFO FOR THIS APP!!!!!!!!!!
+fetch('https://ip-api.com/json?fields=status,country,countryCode,region,city,lat,lon,timezone,currency')
+>>>>>>> 0b4e81914f892252c64d94a47544e52b534d8042
 .then(res=>res.json())
 .then(data=>{
     console.log("location:",data)
@@ -86,7 +91,7 @@ fetch('http://ip-api.com/json?fields=status,country,countryCode,region,city,lat,
     console.log("The local currency is:",currency)
 
     //get exchange rate 
-    const url1 = "https://v6.exchangerate-api.com/v6/93890079f894074c54a1c7fc/latest/USD"
+    const url1 = "http://v6.exchangerate-api.com/v6/93890079f894074c54a1c7fc/latest/USD"
     const url2 = `https://api.exchangerate.host/latest?base=${currency}`
     fetch(url2)
     .then(res=>res.json())

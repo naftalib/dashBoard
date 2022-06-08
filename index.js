@@ -23,7 +23,7 @@ fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
 function getCurrentTimeDate() {
     const date = new Date()
     document.getElementById("time").textContent = date.toLocaleTimeString("en-us", {timeStyle: "short"})
-    document.getElementById('date').textContent = date.toDateString();
+    document.getElementById('date').textContent = date.toDateString()
     
 }
 //call the getTime fn on the second to keep updated acc to seconds
@@ -73,7 +73,8 @@ navigator.geolocation.getCurrentPosition(position => {
 //     console.log("alphaList:",data)
 // })
 
-// !!!!!!!!!!!!! BETTER POSITION API WITH ALL INFO FOR THIS APP!!!!!!!!!!
+// !!!!!!!!!!!!! POSITION API !!!!!!!!!!
+
 fetch('http://ip-api.com/json?fields=status,country,countryCode,region,city,lat,lon,timezone,currency')
 .then(res=>res.json())
 .then(data=>{
@@ -90,6 +91,7 @@ fetch('http://ip-api.com/json?fields=status,country,countryCode,region,city,lat,
     fetch(url2)
     .then(res=>res.json())
     .then(data=>{
+        
         //FUNC TO CONVERT RATES
         const currencyConverter = (rate)=> 1 / rate
         console.log("rateCoversion:", currencyConverter(data.rates.USD).toFixed(3))

@@ -1,11 +1,10 @@
-//Personal Dashboard App- Google Chrome extension
+//------------------Personal Dashboard App (Google Chrome extension) ---------------------------
 
-//Query Selectors
+//SECTION ONE: Using the Fetch Api to make a simple GET request from unsplash.com to generate a random backgrounod img 
 
 const backgroundImg = document.body.style
 const imageAuth = document.getElementById("author")
 
-//Get background image
 fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=nature")
     .then(res => res.json())
     .then(data => {
@@ -13,23 +12,26 @@ fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
 		imageAuth.textContent = `- Image by: ${data.user.name} -`
     })
     .catch(err => {
-        // Use a default background image/author
+        // Default background image/author
+
         backgroundImg.backgroundImage = `url(https://images.unsplash.com/photo-1560008511-11c63416e52d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMTEwMjl8MHwxfHJhbmRvbXx8fHx8fHx8fDE2MjI4NDIxMTc&ixlib=rb-1.2.1&q=80&w=1080
 )`
         imageAuth.textContent = `Image by: Dodi Achmad`
     })
 
-//Generate & display the current time
+// SECTION TWO: Generate & display the current time and date
+
 function getCurrentTimeDate() {
     const date = new Date()
     document.getElementById("time").textContent = date.toLocaleTimeString("en-us", {timeStyle: "short"})
     document.getElementById('date').textContent = date.toDateString()
     
 }
-//call the getTime fn on the second to keep updated acc to seconds
+//fn is called every 1 sec in order to show real time
 setInterval(getCurrentTimeDate, 1000)
 
-//weather API via geoLocation
+//SECTION THREE: Retrieveing the local weather from openweathermap.com, using geoLocation.
+
 navigator.geolocation.getCurrentPosition(position => {
     console.log("geolocation:",position)
     fetch(`https://apis.scrimba.com/openweathermap/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&units=metric`)
@@ -40,9 +42,13 @@ navigator.geolocation.getCurrentPosition(position => {
             return res.json()
         })
         .then(data => {
+
             console.log("weather",data)
+
+            //Weather icon specifications
             const iconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`
 
+            //Various weather atributes deplyed to the relevant DOM elements
             document.getElementById("weather-city").innerHTML =`
                 <p id="weather-city">${data.name}</p>
             `
@@ -67,21 +73,18 @@ navigator.geolocation.getCurrentPosition(position => {
 });
 
 
-// fetch('https://gist.githubusercontent.com/bensquire/1ba2037079b69e38bb0d6aea4c4a0229/raw/8609a1a86683bbd6d0e4a7e9456eabf6e7b65b7f/countries.json')
-// .then(res=>res.json())
-// .then(data=>{
-//     console.log("alphaList:",data)
-// })
+// SECTION FOUR: Using the "ip-api" API to retrieve;
+//1. 
 
-<<<<<<< HEAD
-// !!!!!!!!!!!!! POSITION API !!!!!!!!!!
 
-fetch('http://ip-api.com/json?fields=status,country,countryCode,region,city,lat,lon,timezone,currency')
-=======
-// !!!!!!!!!!!!! BETTER POSITION API WITH ALL INFO FOR THIS APP!!!!!!!!!!
+
 fetch('https://ip-api.com/json?fields=status,country,countryCode,region,city,lat,lon,timezone,currency')
->>>>>>> 0b4e81914f892252c64d94a47544e52b534d8042
-.then(res=>res.json())
+.then(res => {
+    if (res.status === 403) {
+        throw Error("ip-api unavailable")
+    }
+    return res.json()
+})
 .then(data=>{
     console.log("location:",data)
     const countryName = data.countryCode
@@ -94,12 +97,21 @@ fetch('https://ip-api.com/json?fields=status,country,countryCode,region,city,lat
     const url1 = "http://v6.exchangerate-api.com/v6/93890079f894074c54a1c7fc/latest/USD"
     const url2 = `https://api.exchangerate.host/latest?base=${currency}`
     fetch(url2)
-    .then(res=>res.json())
+    .then(res => {
+        if (!res.ok) {
+            throw Error("Exchange rates not available")
+        }
+        return res.json()
+    })
     .then(data=>{
-        
-        //FUNC TO CONVERT RATES
+
+        //Formula to ascertain rate conversion
+
         const currencyConverter = (rate)=> 1 / rate
+
         console.log("rateCoversion:", currencyConverter(data.rates.USD).toFixed(3))
+
+        //Selection of currencies against local currency
         document.getElementById("local-currency").textContent += ` 
         1 ${currency} costs
         `
@@ -116,7 +128,11 @@ fetch('https://ip-api.com/json?fields=status,country,countryCode,region,city,lat
         ${currencyConverter(data.rates.CAD).toFixed(3)}
         `
     })
-
+    .catch(err => {
+        console.error(err)
+        document.getElementById("local-currency").textContent `Conversion Rates currently unavailable`
+    })
+    
 })
 
-
+//----------------------------------------- END APP //-----------------------------------------

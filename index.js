@@ -24,7 +24,7 @@ fetch("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&que
 function getCurrentTimeDate() {
     const date = new Date()
     document.getElementById("time").textContent = date.toLocaleTimeString("en-us", {timeStyle: "short"})
-    document.getElementById('date').textContent = date.toDateString();
+    document.getElementById('date').textContent = date.toDateString()
     
 }
 //fn is called every 1 sec in order to show real time
@@ -106,6 +106,7 @@ fetch('https://ip-api.com/json?fields=status,country,countryCode,region,city,lat
     .then(data=>{
 
         //Formula to ascertain rate conversion
+
         const currencyConverter = (rate)=> 1 / rate
 
         console.log("rateCoversion:", currencyConverter(data.rates.USD).toFixed(3))

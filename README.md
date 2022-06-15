@@ -1,8 +1,8 @@
 # Note:
 
-:roll_eyes: Since this app is making use of free API's, some of the http requests are non-secure, which github pages doesn't support, thus I haven't currently got a live demo on line. 
+:roll_eyes: Since this app is making use of free API's, some of the http requests are non-secure, which github pages doesn't support, therefore currently a live demo isn't available. 
 
-:thumbsup: **Therefore** please download the zip folder here under "code" and run the index.html file on your local browser.
+:thumbsup: **Therefore** to see this app in action simply click the large green "code" button to your top right and download the .zip, unpack adn run the index.html file locally. You can even install it as a chrome extention! 
 
 # About
 
